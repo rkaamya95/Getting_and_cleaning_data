@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title></title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>The run_analysis.R script performs the data preparation and then followed by the 5 steps required as described in the course project’s definition.</p>
+
+<p><strong>Download the dataset</strong>
+Dataset downloaded and extracted under the folder called UCI HAR Dataset</p>
+
+<p><strong>Assign each data to variables</strong>
+features &lt;- features.txt 
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.
+activities &lt;- activity_labels.txt 
+List of activities performed when the corresponding measurements were taken and its codes (labels)
+subject_test &lt;- test/subject_test.txt 
+contains test data of 9/30 volunteer test subjects being observed
+xtest &lt;- test/X_test.txt
+contains recorded features test data
+ytest &lt;- test/y_test.txt 
+contains test data of activities’code labels
+subject_train &lt;- test/subject_train.txt 
+contains train data of 21/30 volunteer subjects being observed
+xtrain &lt;- test/X_train.txt
+contains recorded features train data
+ytrain &lt;- test/y_train.txt 
+contains train data of activities’code labels</p>
+
+<p><strong>Merges the training and the test sets to create one data set</strong>
+X is created by merging x_train and x_test using rbind() function
+Y is created by merging y_train and y_test using rbind() function
+subject is created by merging subject_train and subject_test using rbind() function
+final is created by merging subject, Y and X using cbind() function</p>
+
+<p><strong>Extracts only the measurements on the mean and standard deviation for each measurement</strong>
+newdata is created by subsetting Merged_Data, selecting only columns: subject, code and the measurements on the mean and standard deviation (std) for each measurement</p>
+
+<p><strong>Uses descriptive activity names to name the activities in the data set</strong>
+Entire numbers in code column of the newdata replaced with corresponding activity taken from second column of the activities variable</p>
+
+<p><strong>Appropriately labels the data set with descriptive variable names</strong>
+code column in newdata renamed into activities
+All Acc in column’s name replaced by Accelerometer
+All Gyro in column’s name replaced by Gyroscope
+All BodyBody in column’s name replaced by Body
+All Mag in column’s name replaced by Magnitude
+All start with character f in column’s name replaced by Frequency
+All start with character t in column’s name replaced by Time</p>
+
+<p>From the data set <strong>newdata</strong>, a second data set <strong>d1</strong> is created  with the average of each variable for each activity and each subject
+d1 (180 rows, 88 columns) is created by sumarizing newdata taking the means of each variable for each activity and each subject, after groupped by subject and activity.
+Export d1 into d1.txt file.</p>
+
+</body>
+
+</html>
